@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\admin",
+    "\\src\\app\\admin\\admin-products",
+    "\\src\\app\\admin\\product-form",
+    "\\src\\app\\bs-navbar"
+  ],
+  "SelectedNode": "\\src\\app\\product.service.ts",
+  "PreviewInSolutionExplorer": false
+}
