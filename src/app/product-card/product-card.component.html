@@ -1,0 +1,13 @@
+
+<div class="card">
+  <img class="card-img-top" [src]="product?.imageUrl ? product.imageUrl : 'https://indianacademyofdrones.com/wp-content/themes/eikra/assets/img/noimage-420x273.jpg'">
+  <div class="card-body">
+    <h5 class="card-title">{{ product?.title ? product.title : 'Your Title' }}</h5>
+    <p class="card-text">{{ product.price | currency:'USD':true}}</p>
+  </div>
+  <div class="card-footer">
+    <a href="#" *ngIf="showActions" class="btn btn-primary btn-block">
+      Add to Cart
+    </a>
+  </div>
+</div>

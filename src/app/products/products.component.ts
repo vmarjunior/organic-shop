@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from '../models/product';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
@@ -8,10 +11,29 @@ import { ProductService } from '../product.service';
 })
 export class ProductsComponent implements OnInit {
 
-  products$;
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
+  category: string;
 
-  constructor(productService: ProductService) {
-    this.products$ = productService.getAll();
+  constructor(
+    route: ActivatedRoute,
+    productService: ProductService) {
+
+    productService.getAll().pipe(
+      switchMap((products: Product[]) => {
+        this.products = products;
+        return route.queryParamMap;
+      })
+    ).subscribe(params => {
+      this.category = params.get('category');
+      this.filterProducts();
+    });
+  }
+
+  filterProducts() {
+    this.filteredProducts = (this.category) ?
+      this.filteredProducts = this.products.filter(p => p.category === this.category) :
+      this.products;
   }
 
   ngOnInit() {

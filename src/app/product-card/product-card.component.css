@@ -1,0 +1,17 @@
+
+.card {
+  min-width: 18rem;
+  max-width: 18rem;
+  max-height: 24rem;
+}
+
+.card-img-top {
+  max-height: 12rem;
+  min-height: 12rem;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.card-footer{
+  padding:0px;
+}

@@ -1,16 +1,20 @@
-.column{
-  margin:7px;
+.col {
+    margin-bottom:10px;
 }
 
-.card {
-  min-width: 15rem;
-  min-height: 22rem;
-  max-width: 15rem;
-  max-height: 22rem;
+.list-group-item {
+  cursor: pointer
 }
 
-.card-img-top {
-  max-height: 12rem;
-  min-height: 12rem;
-  overflow: hidden;
+.list-group > .active {
+  color:white;
+  font-weight:bold;
+  cursor:not-allowed;
+}
+
+@media(max-width:1280px) {
+  .col {
+    display: flex !important;
+    justify-content: center !important;
+  }
 }

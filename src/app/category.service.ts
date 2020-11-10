@@ -9,7 +9,7 @@ export class CategoryService {
 
   constructor(private db: AngularFirestore) { }
 
-  getCategories() {
+  getAll() {
     return this.db.collection('/categories').stateChanges()
       .pipe(
         map(categories =>
