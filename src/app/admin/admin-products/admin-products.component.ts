@@ -1,20 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ProductService } from '../../product.service';
+import { Subscription } from 'rxjs';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css']
 })
-export class AdminProductsComponent implements OnInit {
+export class AdminProductsComponent implements OnDestroy {
 
-  products$;
+  products: Product[];
+  filteredProducts: Product[];
+  subscription: Subscription;
 
   constructor(private productService: ProductService) {
-    this.products$ = this.productService.getAll();
+    this.subscription = this.productService.getAll<Product>().subscribe(products => this.products = this.filteredProducts = products);
   }
 
-  ngOnInit() {
+  filter(query: string) {
+    this.filteredProducts = (query) ?
+      this.products.filter(p => (p.title as string).toLowerCase().includes(query.toLowerCase())) :
+      this.products;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

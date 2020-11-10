@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { Product } from './models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -14,32 +15,19 @@ export class ProductService {
     return this.db.collection('/products').add(product);
   }
 
-  getAll() {
+  getAll<T>() {
     return this.db.collection('/products').snapshotChanges()
       .pipe(
         map(products =>
-          products.map(prod => ({
-            key: prod.payload.doc.id,
-            data: prod.payload.doc.data()
-          }))
+          products.map(prod => {
+            const value = <any>Object.assign({}, prod.payload.doc.data());
+            value.key = prod.payload.doc.id;
+            return <T>value;
+          })
         )
-      );
+    );
 
-    //Obsolete
-    /*
-    return this.db.collection('/products').snapshotChanges()
-      .pipe(
-        map(products =>
-          products.map(prod => ({
-            key: prod.payload.doc.id,
-            category: (prod.payload.doc.data() as any).category,
-            title: (prod.payload.doc.data() as any).title,
-            imageUrl: (prod.payload.doc.data() as any).imageUrl,
-            price: (prod.payload.doc.data() as any).price
-          })).sort((a, b) => (a.title > b.title ? 1 : -1))
-        )
-      );
-      */
+    //.sort((a, b) => (a.title > b.title ? 1 : -1))
   }
 
   get(productId) {

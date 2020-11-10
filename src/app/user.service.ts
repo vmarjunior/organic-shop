@@ -12,11 +12,17 @@ export class UserService {
   constructor(private db: AngularFirestore) { }
 
   save(user: firebase.User) {
-    this.db.doc('/users/' + user.uid).set({
+
+    //Admins: you should add the field 'isAdmin: true' on firestore manually
+
+    this.db.doc('/users/' + user.uid).update({
       name: user.displayName,
       email: user.email
-    }, { merge: true })
-      .catch((reason: any) => console.log('User save failed:', reason));
+    }).catch(() =>
+      this.db.doc('/users/' + user.uid).set({
+        name: user.displayName,
+        email: user.email
+      }).catch((reason: any) => console.log('User save failed:', reason)));
   }
 
   get(uid: string): Observable<AppUser> {
