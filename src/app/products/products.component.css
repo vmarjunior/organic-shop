@@ -1,0 +1,16 @@
+.column{
+  margin:7px;
+}
+
+.card {
+  min-width: 15rem;
+  min-height: 22rem;
+  max-width: 15rem;
+  max-height: 22rem;
+}
+
+.card-img-top {
+  max-height: 12rem;
+  min-height: 12rem;
+  overflow: hidden;
+}
