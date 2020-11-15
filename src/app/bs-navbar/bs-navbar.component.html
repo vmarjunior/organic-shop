@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 
   <a class="navbar-brand" href="/">
-    <img src="../assets/img/oshop_logo.png" height="70"  />
+    <img src="../assets/img/oshop_logo.png" height="70" />
   </a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed">
@@ -12,7 +12,12 @@
     <ul class="navbar-nav ml-auto">
 
       <li class="nav-item">
-        <a class="nav-link" routerLink="/shopping-cart">Shopping Cart</a>
+        <a class="nav-link" routerLink="/shopping-cart">
+
+          <span class="badge-warning badge-pill" *ngIf="cart$ | async as cart">{{cart.getTotalItemsCount()}}</span>
+
+          Shopping Cart
+        </a>
       </li>
 
 

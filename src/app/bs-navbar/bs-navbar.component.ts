@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { AppUser } from '../models/add-user';
+import { ShoppingCartService } from '../shopping-cart.service';
+import { ShoppingCart } from '../models/shopping-cart';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-bs-navbar',
@@ -8,12 +11,19 @@ import { AppUser } from '../models/add-user';
   styleUrls: ['./bs-navbar.component.css']
 })
 
-export class BsNavbarComponent {
+export class BsNavbarComponent implements OnInit {
   isCollapsed = true;
   appUser: AppUser;
+  cart$: Observable<ShoppingCart>;
 
-  constructor(private auth: AuthService) {
-    auth.appUser$.subscribe(appUser => this.appUser = appUser);
+  constructor(private auth: AuthService,
+    private shoppingCartService: ShoppingCartService) {
+  }
+
+
+  async ngOnInit() {
+    this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
+    this.cart$ = await this.shoppingCartService.getCart();
   }
 
   logout() {

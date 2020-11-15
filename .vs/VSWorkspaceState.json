@@ -6,9 +6,9 @@
     "\\src\\app\\admin",
     "\\src\\app\\admin\\admin-products",
     "\\src\\app\\admin\\product-form",
-    "\\src\\app\\bs-navbar",
-    "\\src\\app\\models"
+    "\\src\\app\\product-card",
+    "\\src\\app\\products"
   ],
-  "SelectedNode": "\\src\\app\\user.service.ts",
+  "SelectedNode": "\\src\\app\\product-card\\product-card.component.ts",
   "PreviewInSolutionExplorer": false
 }
