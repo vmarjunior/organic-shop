@@ -3,11 +3,9 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\admin",
-    "\\src\\app\\admin\\admin-products",
-    "\\src\\app\\admin\\product-form",
+    "\\src\\app\\models",
     "\\src\\app\\product-card",
-    "\\src\\app\\products"
+    "\\src\\app\\product-quantity"
   ],
   "SelectedNode": "\\src\\app\\product-card\\product-card.component.ts",
   "PreviewInSolutionExplorer": false

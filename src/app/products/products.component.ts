@@ -20,14 +20,23 @@ export class ProductsComponent implements OnInit, OnDestroy {
   cartSubscription: Subscription;
 
   constructor(
-    route: ActivatedRoute,
-    productService: ProductService,
+    private route: ActivatedRoute,
+    private productService: ProductService,
     private shoppingCartService: ShoppingCartService) {
+  }
 
-    productService.getAll().pipe(
+  async ngOnInit() {
+    this.cartSubscription = (await this.shoppingCartService.getCart())
+      .subscribe(cart => this.cart = cart);
+
+    this.populateProducts();
+  }
+
+  private populateProducts() {
+    this.productService.getAll().pipe(
       switchMap((products: Product[]) => {
         this.products = products;
-        return route.queryParamMap;
+        return this.route.queryParamMap;
       })
     ).subscribe(params => {
       this.category = params.get('category');
@@ -35,15 +44,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
 
-  filterProducts() {
+  private filterProducts() {
     this.filteredProducts = (this.category) ?
       this.filteredProducts = this.products.filter(p => p.category === this.category) :
       this.products;
-  }
-
-  async ngOnInit() {
-    this.cartSubscription = (await this.shoppingCartService.getCart())
-      .subscribe(cart => this.cart = cart);
   }
 
   ngOnDestroy(): void {

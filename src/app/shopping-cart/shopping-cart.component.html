@@ -1,3 +1,47 @@
-<p>
-  shopping-cart works!
-</p>
+<div class="container">
+  <h1>Shopping Cart</h1>
+
+  <ng-container *ngIf="cart$ | async as cart">
+    <p>
+      You have {{ cart.totalItemsCount() }} items in your shopping cart.
+    </p>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Product</th>
+          <th class="text-center">Quantity</th>
+          <th class="text-right">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cart.items;">
+          <td class="thumbnailHolder">
+            <img [src]="item.product.imageUrl" class="thumbnail" alt="" />
+          </td>
+          <td>{{item.product.title}}</td>
+          <td class="text-center">
+            <div class="w-75 mx-auto ">
+              <product-quantity [product]="item.product" [shopping-cart]="cart"></product-quantity>
+            </div>
+          </td>
+          <td class="text-right">{{item.totalPrice() | currency:'USD':true}}</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="text-right">{{cart.totalPrice() | currency:'USD':true}}</th>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="btn btn-danger btn-sm" (click)="clearShoppingCart()">
+      Clear Shopping Cart
+    </button>
+
+  </ng-container>
+</div>

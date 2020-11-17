@@ -4,6 +4,7 @@ import { Product } from './models/product';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ShoppingCart } from './models/shopping-cart';
+import { ShoppingCartItem } from './models/shopping-cart-item';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,8 @@ export class ShoppingCartService {
 
   constructor(private db: AngularFirestore) { }
 
-  private create() {
-    return this.db.collection('/shopping-carts').add({
-      dateCreated: new Date().getTime()
-    });
-  }
+
+  //Public API
 
   async getCart(): Promise<Observable<ShoppingCart>> {
     let cartId = await this.getOrCreateCartId();
@@ -27,9 +25,16 @@ export class ShoppingCartService {
           let shoppingCart = new ShoppingCart();
           shoppingCart.key = cartId;
           shoppingCart.items = cart.map(cartItem => {
-            const value = <any>Object.assign({}, cartItem.payload.doc.data());
-            value.key = cartItem.payload.doc.id;
-            return value;
+
+            let data = (cartItem.payload.doc.data() as any);
+
+            let item = new ShoppingCartItem(
+              cartItem.payload.doc.id,
+              data.product,
+              data.quantity
+            );
+
+            return item;
           });
 
           return shoppingCart;
@@ -37,6 +42,28 @@ export class ShoppingCartService {
       );
 
     return cart;
+  }
+
+  async addToCart(product: Product) {
+    this.updateItemQuantity(product, 1);
+  }
+
+  async removeFromCart(product: Product) {
+    this.updateItemQuantity(product, -1);
+  }
+
+  async clearShoppingCart() {
+    let cartId = await this.getOrCreateCartId();
+    this.db.collection('/shopping-carts/').doc(cartId).collection('/items/').get().forEach(item => item.docs.forEach(doc => doc.ref.delete()));
+  }
+
+
+  //Private API
+
+  private create() {
+    return this.db.collection('/shopping-carts').add({
+      dateCreated: new Date().getTime()
+    });
   }
 
   private getItem(cartId: string, productId: string) {
@@ -54,23 +81,22 @@ export class ShoppingCartService {
     return cart.id;
   }
 
-  async addToCart(product: Product) {
-    this.updateItemQuantity(product, 1);
-  }
-
-  async removeFromCart(product: Product) {
-    this.updateItemQuantity(product, -1);
-  }
-
   private async updateItemQuantity(product: Product, change: number) {
     let cartId = await this.getOrCreateCartId();
     let item$ = await this.getItem(cartId, product.key);
 
     item$.get().subscribe(item => {
-      item$.set({
-        product: product,
-        quantity: item.exists ? ((item.data().quantity || 0) + change) : 1
-      });
+
+      let quantity = item.exists ? ((item.data().quantity || 0) + change) : 1;
+
+      if (quantity >= 1)
+        item$.set({
+          product: product,
+          quantity: quantity
+        });
+      else
+        item.ref.delete();
+
     });
   }
 

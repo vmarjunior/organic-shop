@@ -1,0 +1,19 @@
+.container {
+  overflow: auto !important;
+}
+
+.table {
+  min-width: 800px !important;
+}
+
+.thumbnailHolder{
+    width:120px;
+    margin:auto;
+}
+
+.thumbnail {
+  object-fit: cover;
+  width: 75px;
+  height: 75px;
+  border-radius: 100%;
+}
