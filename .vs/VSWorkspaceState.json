@@ -4,11 +4,9 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\models",
-    "\\src\\app\\product-card",
-    "\\src\\app\\product-quantity",
-    "\\src\\app\\products",
+    "\\src\\app\\services",
     "\\src\\app\\shopping-cart"
   ],
-  "SelectedNode": "\\src\\app\\products\\products.component.ts",
+  "SelectedNode": "\\src\\app\\services\\order.service.ts",
   "PreviewInSolutionExplorer": false
 }

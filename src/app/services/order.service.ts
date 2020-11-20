@@ -15,7 +15,6 @@ export class OrderService {
     private shoppingCartService: ShoppingCartService) { }
 
   createOrder(shoppingCart: ShoppingCart, userId: string): boolean {
-
     this.db.collection('orders').add({
       orderDate: new Date().getTime(),
       items: this.getCartItems(shoppingCart.items),
@@ -29,6 +28,30 @@ export class OrderService {
     return true;
   }
 
+
+  getUserOrders(userId: string): Order[] {
+    let returnOrders = [];
+
+    this.db.collection('orders').valueChanges({ userId: userId })
+      .subscribe(orders =>
+        orders.forEach(order =>
+          returnOrders.push(order)
+        ));
+
+    return returnOrders;
+  }
+
+  getAllOrders(): Order[] {
+    let returnOrders = [];
+
+    this.db.collection('orders').valueChanges()
+      .subscribe(orders =>
+        orders.forEach(order =>
+          returnOrders.push(order)
+        ));
+
+    return returnOrders;
+  }
 
   private getCartItems(shoppingCartItems: ShoppingCartItem[]) {
     let items = [];

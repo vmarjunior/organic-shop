@@ -1,3 +1,36 @@
-<p>
-  my-orders works!
-</p>
+<div class="container">
+
+  <h4 class="my-4">My Orders</h4>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th class="text-center">Products</th>
+        <th class="text-right">Total Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.orderDate | date}}</td>
+        <td class="text-center">{{ order.itemsCount }}</td>
+        <td class="text-right">{{ order.totalPrice | currency:'USD':true}}</td>
+        <td>
+          <a href="#">View</a>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="orders">
+      <tr>
+        <td>
+          <b>Total: {{ orders.length }}</b>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+
+</div>
