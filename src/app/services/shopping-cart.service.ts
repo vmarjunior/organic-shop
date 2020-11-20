@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Product } from './models/product';
+import { Product } from './../models/product';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ShoppingCart } from './models/shopping-cart';
-import { ShoppingCartItem } from './models/shopping-cart-item';
+import { ShoppingCart } from './../models/shopping-cart';
+import { ShoppingCartItem } from './../models/shopping-cart-item';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +56,6 @@ export class ShoppingCartService {
     let cartId = await this.getOrCreateCartId();
     this.db.collection('/shopping-carts/').doc(cartId).collection('/items/').get().forEach(item => item.docs.forEach(doc => doc.ref.delete()));
   }
-
 
   //Private API
 

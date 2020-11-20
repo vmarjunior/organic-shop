@@ -39,8 +39,16 @@
       </tbody>
     </table>
 
-    <button class="btn btn-danger btn-sm" (click)="clearShoppingCart()">
+    <button class="btn btn-danger btn-sm" (click)="clearShoppingCart()" [disabled]="cart.totalItemsCount() == 0">
       Clear Shopping Cart
+    </button>
+
+    <button [class]="cart.totalItemsCount() == 0
+            ? 'btn btn-secondary float-right'
+            : 'btn btn-primary float-right'"
+            [disabled]="cart.totalItemsCount() == 0"
+            (click)="placeOrder(cart)">
+      Place Order
     </button>
 
   </ng-container>
