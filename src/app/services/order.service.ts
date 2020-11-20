@@ -4,6 +4,7 @@ import { Order } from '../models/order';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ShoppingCartService } from './shopping-cart.service';
 import { ShoppingCartItem } from '../models/shopping-cart-item';
+import { AppUser } from '../models/app-user';
 
 @Injectable({
   providedIn: 'root'
@@ -46,9 +47,13 @@ export class OrderService {
 
     this.db.collection('orders').valueChanges()
       .subscribe(orders =>
-        orders.forEach(order =>
-          returnOrders.push(order)
-        ));
+        orders.forEach((order: Order) => {
+          this.db.collection('users').doc(order.userId).get().subscribe(user => {
+            order.user = user.data() as AppUser;
+            returnOrders.push(order);
+          });
+        })
+      );
 
     return returnOrders;
   }

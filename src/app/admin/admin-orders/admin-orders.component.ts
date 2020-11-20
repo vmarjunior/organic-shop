@@ -12,13 +12,7 @@ export class AdminOrdersComponent {
 
   orders: Order[];
 
-  constructor(
-    private orderService: OrderService,
-    private authService: AuthService) {
-
-    this.authService.user$.subscribe(user => {
-      this.orders = orderService.getUserOrders(user.uid);
-    });
-
+  constructor(orderService: OrderService) {
+    this.orders = orderService.getAllOrders();
   }
 }

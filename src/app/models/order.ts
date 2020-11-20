@@ -5,5 +5,6 @@ export class Order {
   key: string;
   orderDate: Date;
   userId: string;
+  user: AppUser;
   items: ShoppingCartItem[];
 }
