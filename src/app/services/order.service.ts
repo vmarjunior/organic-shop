@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ShoppingCartService } from './shopping-cart.service';
 import { ShoppingCartItem } from '../models/shopping-cart-item';
 import { AppUser } from '../models/app-user';
+import { ShippingAddress } from '../models/shipping-address';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,10 @@ export class OrderService {
     private db: AngularFirestore,
     private shoppingCartService: ShoppingCartService) { }
 
-  createOrder(shoppingCart: ShoppingCart, userId: string): boolean {
+  createOrder(shoppingCart: ShoppingCart, shippingAddress: ShippingAddress, userId: string): boolean {
     this.db.collection('orders').add({
       orderDate: new Date().getTime(),
+      shippingAddress: shippingAddress,
       items: this.getCartItems(shoppingCart.items),
       totalPrice: shoppingCart.totalPrice(),
       itemsCount: shoppingCart.totalItemsCount(),

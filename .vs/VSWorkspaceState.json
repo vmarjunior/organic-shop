@@ -3,7 +3,11 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\admin",
+    "\\src\\app\\admin\\product-form",
+    "\\src\\app\\check-out",
     "\\src\\app\\models",
+    "\\src\\app\\my-orders",
     "\\src\\app\\services",
     "\\src\\app\\shopping-cart"
   ],

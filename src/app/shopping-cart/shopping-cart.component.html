@@ -47,8 +47,8 @@
             ? 'btn btn-secondary float-right'
             : 'btn btn-primary float-right'"
             [disabled]="cart.totalItemsCount() == 0"
-            (click)="placeOrder(cart)">
-      Place Order
+            routerLink="/check-out">
+      Check Out
     </button>
 
   </ng-container>

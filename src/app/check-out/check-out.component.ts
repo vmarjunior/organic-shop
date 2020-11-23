@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../services/order.service';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { ShoppingCart } from '../models/shopping-cart';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 @Component({
   selector: 'app-check-out',
@@ -7,9 +12,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckOutComponent implements OnInit {
 
-  constructor() { }
+  cart$: any;
 
-  ngOnInit() {
+  constructor(
+    private shoppingCartService: ShoppingCartService,
+    private orderService: OrderService,
+    private authService: AuthService,
+    private router: Router) { }
+
+  async ngOnInit() {
+    this.cart$ = await this.shoppingCartService.getCart();
   }
 
 }
