@@ -19,7 +19,7 @@
         <td class="text-center">{{ order.itemsCount }}</td>
         <td class="text-right">{{ order.totalPrice | currency:'USD':true}}</td>
         <td>
-          <a href="#">View</a>
+          <order-details [order]="order"></order-details>
         </td>
       </tr>
     </tbody>

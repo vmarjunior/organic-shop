@@ -1,12 +1,16 @@
 import { AppUser } from "./app-user";
-import { ShoppingCartItem } from "./shopping-cart-item";
 import { ShippingAddress } from "./shipping-address";
+import { OrderItem } from "./order-item";
 
 export class Order {
   key: string;
   orderDate: Date;
   userId: string;
+  items: OrderItem[];
+  itemsCount: number;
+  totalPrice: number;
+  shippingAddress: ShippingAddress;
+
+  //Auxiliary
   user: AppUser;
-  items: ShoppingCartItem[];
-  shipping: ShippingAddress;
 }

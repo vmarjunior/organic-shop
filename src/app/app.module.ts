@@ -37,6 +37,7 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
 import { OrderService } from './services/order.service';
 import { ShippingAddressComponent } from './check-out/shipping-address/shipping-address.component';
 import { OrderSummaryComponent } from './check-out/order-summary/order-summary.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { OrderSummaryComponent } from './check-out/order-summary/order-summary.c
     ProductCardComponent,
     ProductQuantityComponent,
     ShippingAddressComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,

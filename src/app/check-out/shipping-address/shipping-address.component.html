@@ -20,7 +20,7 @@
         Address
         <label class="text-danger">*</label>
       </label>
-      <input id="line1" name="addressLine1" class="form-control" type="text" placeholder="Line 1" [(ngModel)]="shippingAddress.adressLine1" #addressLine1="ngModel" required />
+      <input id="line1" name="addressLine1" class="form-control" type="text" placeholder="Line 1" [(ngModel)]="shippingAddress.addressLine1" #addressLine1="ngModel" required />
       <div class="alert alert-danger" *ngIf="addressLine1.touched && addressLine1.invalid">
         Address Line 1 is required.
       </div>

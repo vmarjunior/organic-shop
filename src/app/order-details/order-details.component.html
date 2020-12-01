@@ -1,0 +1,73 @@
+<ng-template #content let-modal>
+
+  <div class="modal-header">
+
+    <div class="modal-title" id="modal-basic-title">
+      <h4>Order Details</h4>
+      <p class="m-1">Order date <b>{{ order.orderDate | date}}</b>.</p>
+    </div>
+
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <br />
+  </div>
+
+  <div class="modal-body">
+
+
+    <ngb-tabset #tabs="ngbTabset">
+      <ngb-tab title="Products">
+        <ng-template ngbTabContent>
+
+          <p class="mt-5">The order contained <b>{{ order.itemsCount }}</b> items.</p>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <td><b>Items</b></td>
+                <td class="text-right"><b>Total</b></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-row" *ngFor="let item of order.items">
+                <td>
+                  {{ item.quantity }}x {{ item.product.title }}
+                </td>
+                <td class="text-right">
+                  {{ item.totalPrice | currency:'USD':'symbol' }}
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>
+                  <b>Total:</b>
+                </td>
+                <td class="text-right">
+                  <b>{{ order.totalPrice | currency:'USD':'symbol'}}</b>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Shipment">
+        <ng-template ngbTabContent>
+
+          <p class="m-1 mt-5">Name: <b>{{order.shippingAddress.name}}</b></p>
+          <p class="m-1">Address Line 1: <b>{{order.shippingAddress.addressLine1}}</b></p>
+          <p class="m-1">Address Line 2: <b>{{order.shippingAddress.addressLine2}}</b></p>
+          <p class="m-1 mb-5">City: <b>{{order.shippingAddress.city}}</b></p>
+
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+
+
+  </div>
+
+</ng-template>
+
+<button class="btn btn-sm btn-outline-primary" (click)="open(content)">View</button>

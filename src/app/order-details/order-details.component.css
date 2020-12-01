@@ -1,0 +1,7 @@
+.close:focus {
+    outline: none;
+}
+
+.table-row {
+    line-height: 0.7;
+}
