@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\admin",
-    "\\src\\app\\admin\\product-form",
-    "\\src\\app\\check-out",
-    "\\src\\app\\models",
+    "\\src\\app\\admin\\admin-products",
+    "\\src\\app\\home",
     "\\src\\app\\my-orders",
+    "\\src\\app\\products",
     "\\src\\app\\services",
     "\\src\\app\\shopping-cart"
   ],
-  "SelectedNode": "\\src\\app\\services\\order.service.ts",
+  "SelectedNode": "\\src\\app\\admin\\admin-products\\admin-products.component.html",
   "PreviewInSolutionExplorer": false
 }

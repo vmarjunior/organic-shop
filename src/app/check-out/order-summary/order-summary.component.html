@@ -1,0 +1,29 @@
+<h6 class="mt-5">Order Summary</h6>
+<hr />
+
+<span class="small">You have {{ cart.totalItemsCount() }} items in your cart.</span>
+
+<div class="container mt-4">
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let item of cart.items">
+        <td>
+          {{ item.quantity }}x {{ item.product.title }}
+        </td>
+        <td class="text-right">
+          {{ item.totalPrice() | currency:'USD':true }}
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>
+          <b>Total:</b>
+        </td>
+        <td class="text-right">
+          <b>{{ cart.totalPrice() | currency:'USD':true}}</b>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

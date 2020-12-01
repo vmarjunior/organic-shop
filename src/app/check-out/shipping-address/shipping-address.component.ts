@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ShoppingCart } from '../../models/shopping-cart';
 import { AuthService } from '../../services/auth.service';
+import { OrderService } from '../../services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'shipping-address',
@@ -13,7 +15,10 @@ export class ShippingAddressComponent implements OnInit {
   shippingAddress: any = {};
 
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private orderService: OrderService,
+    private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -21,9 +26,6 @@ export class ShippingAddressComponent implements OnInit {
   placeOrder(cart: ShoppingCart, form: any) {
     this.authService.user$.subscribe(user => {
 
-      console.log(form);
-
-      /*
       if (!user)
         return alert('You need to log in in order to continue.');
 
@@ -33,7 +35,7 @@ export class ShippingAddressComponent implements OnInit {
         this.router.navigate(['/order-success']);
       else
         alert('There was an error sending your order, please try again later.');
-        */
+
     });
   }
 }
