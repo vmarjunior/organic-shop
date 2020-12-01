@@ -1,0 +1,17 @@
+<div class="row">
+
+  <div class="col-2">
+    <product-filter [category]="category"></product-filter>
+  </div>
+
+  <div class="col">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col" *ngFor="let p of filteredProducts">
+          <product-card [product]="p" [shopping-cart]="cart"></product-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

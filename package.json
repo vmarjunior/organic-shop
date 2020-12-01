@@ -27,6 +27,7 @@
     "core-js": "^2.5.4",
     "firebase": "^5.0.3",
     "firebase-tools": "^8.14.1",
+    "font-awesome": "^4.7.0",
     "g": "^2.0.1",
     "ngx-custom-validators": "6.1.0",
     "rxjs": "~6.2.0",

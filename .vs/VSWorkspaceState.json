@@ -3,14 +3,9 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\check-out",
-    "\\src\\app\\check-out\\order-summary",
-    "\\src\\app\\check-out\\shipping-address",
-    "\\src\\app\\models",
-    "\\src\\app\\order-success",
-    "\\src\\app\\services",
-    "\\src\\app\\shopping-cart"
+    "\\src\\app\\admin",
+    "\\src\\app\\admin\\admin-orders"
   ],
-  "SelectedNode": "\\src\\app\\order-success\\order-success.component.html",
+  "SelectedNode": "\\src\\app\\models",
   "PreviewInSolutionExplorer": false
 }

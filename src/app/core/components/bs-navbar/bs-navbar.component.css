@@ -1,0 +1,14 @@
+.dropdown-menu-right {
+  right: 0;
+  left: auto !important;
+}
+
+.badge-pill {
+  border-radius: 1000;
+  padding-right: 0.4em;
+  padding-left: 0.4em;
+  margin-left: -2px;
+  margin-right: 9px;
+  color: black;
+  font-weight: bold;
+}
